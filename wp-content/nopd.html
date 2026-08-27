@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Peringatan Dini Gelombang Tinggi</title>
+  <link rel="stylesheet" href="https://maritimjatim.info/view/bmkg/asset/plugins/bootstrap/css/bootstrap.min.css">	
+  <link rel="stylesheet" href="https://maritimjatim.info/view/bmkg/asset/plugins/font-awesome/css/font-awesome.min.css">
+  
+  <style>
+    body {
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+
+    /* LAYER 1: Outermost Canvas Frame (Completely transparent outside the border radius) */
+    #html-content-holder {
+      background: transparent; 
+      max-width: 600px;
+      border-radius: 16px;
+      overflow: hidden; /* Clips everything neatly to the 16px rounded corners */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* LAYER 2: The White Backing Base (Makes the card background solid white instead of transparent) */
+    .card-backing {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* LAYER 3: Header Block */
+    .card-head {
+      background: #1d3557;
+      color: #ffffff;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    .card-head h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* LAYER 4: Translucent Green Overlay on top of the Solid White Backing */
+    .card-body {
+      background: rgba(42, 157, 143, 0.1); /* The translucent tint you want */
+      border: 2px solid #2a9d8f; 
+      border-top: none;
+      padding: 20px;
+      text-align: center;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    .card-body div {
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Checkerboard pattern helper to visually test transparency in the preview window */
+    .preview-box {
+      background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #e0e0e0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #e0e0e0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+      padding: 15px;
+      display: inline-block;
+      border-radius: 16px;
+      background-color: #f0f0f0;
+    }
+
+    .preview-box canvas {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h3>Ubah Tanggal Awal dan Akhir</h3>
+    <form id="dateForm">
+      <div class="mb-3">
+        <label class="form-label">Tanggal Awal:</label>
+        <input type="text" class="form-control" name="firstname" id="input-firstname">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tanggal Akhir:</label>
+        <input type="text" class="form-control" name="lastname" id="input-lastname">
+      </div>
+    </form>
+  </div>
+
+  <div id="html-content-holder">
+    <div class="card-backing">
+      
+      <div class="card-head">
+        <h4>Informasi Peringatan Dini Gelombang Tinggi</h4>
+      </div>
+      
+      <div class="card-body">
+        <div>
+          <strong>Berlaku <span id="firstname"></span> pukul 09.00 WIT hingga <span id="lastname"></span> pukul 09.00 WIT</strong>
+          <br><br>
+          <strong>TIDAK ADA <span style="font-weight: 400; color: #2a9d8f;">Peringatan Dini Gelombang Tinggi di Wilayah Perairan Maluku.</span></strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <button id="btn_convert" class="btn btn-primary"><i class="fa fa-download"></i> Download Image</button>
+  </div>
+
+  <hr>
+  <h3>Preview :</h3>
+  <div id="previewImg" class="preview-box"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+  <script>
+    const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    const formattedToday = `${today.getDate()} ${months[today.getMonth()]} ${today.getFullYear()}`;
+    const formattedTomorrow = `${tomorrow.setDate(tomorrow.getDate()) && tomorrow.getDate()} ${months[tomorrow.getMonth()]} ${tomorrow.getFullYear()}`;
+
+    const inputStart = document.getElementById('input-firstname');
+    const inputEnd = document.getElementById('input-lastname');
+    const labelStart = document.getElementById('firstname');
+    const labelEnd = document.getElementById('lastname');
+
+    inputStart.value = formattedToday;
+    inputEnd.value = formattedTomorrow;
+    labelStart.textContent = formattedToday;
+    labelEnd.textContent = formattedTomorrow;
+
+    inputStart.addEventListener('keyup', (e) => labelStart.textContent = e.target.value);
+    inputEnd.addEventListener('keyup', (e) => labelEnd.textContent = e.target.value);
+
+    const pad = (n) => n < 10 ? '0' + n : n;
+    const datestring = `${today.getFullYear()}${pad(today.getMonth() + 1)}${pad(today.getDate())}`;
+
+    document.getElementById("btn_convert").addEventListener("click", function() {
+      const previewContainer = document.getElementById("previewImg");
+      previewContainer.innerHTML = ""; 
+
+      html2canvas(document.getElementById("html-content-holder"), {
+        allowTaint: true,
+        useCORS: true,
+        backgroundColor: null // Keeps the absolute exterior pixels transparent
+      }).then(function (canvas) {
+        const anchorTag = document.createElement("a");
+        document.body.appendChild(anchorTag);
+        previewContainer.appendChild(canvas);
+        
+        anchorTag.download = `NO PD ${datestring}.png`;
+        anchorTag.href = canvas.toDataURL("image/png"); 
+        anchorTag.target = '_blank';
+        anchorTag.click();
+        
+        document.body.removeChild(anchorTag);
+      });
+    });
+  </script>
+</body>
+</html>

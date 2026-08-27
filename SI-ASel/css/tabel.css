@@ -1,0 +1,27 @@
+  /* Ganti ukuran font pada konten tabel */
+  .dataTables_wrapper td,
+  .dataTables_wrapper th {
+      font-size: 12px;
+      text-align: center;
+  }
+
+  /* Ganti warna latar belakang untuk baris bergantian */
+  .dataTable tbody tr:nth-child(odd) {
+      background-color: #f2f2f2;
+      /* Warna untuk baris ganjil */
+  }
+
+  .dataTable tbody tr:nth-child(even) {
+      background-color: #ffffff;
+      /* Warna untuk baris genap */
+  }
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.vertical-divider {
+    margin: 0 5px; /* Adjust the margin as needed */
+}
+

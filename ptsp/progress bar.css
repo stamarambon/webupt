@@ -1,0 +1,264 @@
+.progress-bar1 {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+.progress-bar1 li {
+  flex: 2;
+  position: relative;
+  padding: 0 0 14px 0;
+  font-size: var(--font-size-default);
+  line-height: 1.5;
+  color: gray;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: visible;
+  min-width: 0;
+  text-align: center;
+  border-bottom: 2px solid var(--color-gray-disabled);
+}
+.progress-bar1 li:first-child,
+.progress-bar1 li:last-child {
+  flex: 1;
+}
+.progress-bar1 li:last-child {
+  text-align: right;
+}
+.progress-bar1 li:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-gray-disabled);
+  border-radius: 50%;
+  border: 2px solid var(--color-white);
+  position: absolute;
+  left: calc(50% - 6px);
+  bottom: -5px;
+  z-index: 3;
+  transition: all .2s ease-in-out;
+}
+.progress-bar1 li:first-child:before {
+  left: 0;
+}
+.progress-bar1 li:last-child:before {
+  right: 0;
+  left: auto;
+}
+.progress-bar1 span {
+  transition: opacity .3s ease-in-out;
+}
+.progress-bar1 li:not(.is-active) span {
+  opacity: 0;
+}
+.progress-bar1 .is-complete:not(:first-child):after,
+.progress-bar1 .is-active:not(:first-child):after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: -2px;
+  left: -50%;
+  z-index: 2;
+  border-bottom: 2px solid #d51414;
+}
+.progress-bar1 li:last-child span {
+  width: 200%;
+  display: inline-block;
+  position: absolute;
+  left: -100%;
+}
+
+.progress-bar1 .is-complete:last-child:after,
+.progress-bar1 .is-active:last-child:after {
+  width: 200%;
+  left: -100%;
+}
+
+.progress-bar1 .is-complete:before {
+  background-color: #d51414;
+}
+
+
+.progress-bar1 li.is-active span {
+  color: #d51414;
+}
+
+.progress-bar1 li.is-complete span {
+  color: #d51414;
+}
+
+.progress-bar1 .is-active:before,
+
+.progress-bar1 .is-hovered:before {
+  background-color: var(--color-white);
+  border-color: #d51414;
+}
+.progress-bar1 li:hover:before,
+.progress-bar1 .is-hovered:before {
+  transform: scale(1.33);
+}
+
+.progress-bar1 li:hover span,
+.progress-bar1 li.is-hovered span {
+  opacity: 1;
+}
+
+.progress-bar1:hover li:not(:hover) span {
+  opacity: 0;
+}
+
+.x-ray .progress-bar1,
+.x-ray .progress-bar1 li {
+  border: 1px dashed red;
+}
+
+.progress-bar1 .has-changes {
+  opacity: 1 !important;
+}
+.progress-bar1 .has-changes:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  left: calc(50% - 4px);
+  bottom: -20px;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20fill%3D%22%23ed1c24%22%20d%3D%22M4%200l4%208H0z%22%2F%3E%3C%2Fsvg%3E');
+}
+
+
+
+
+.progress-bar2 {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+.progress-bar2 li {
+  flex: 2;
+  position: relative;
+  padding: 0 0 14px 0;
+  font-size: var(--font-size-default);
+  line-height: 1.5;
+  color: gray;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: visible;
+  min-width: 0;
+  text-align: center;
+  border-bottom: 2px solid var(--color-gray-disabled);
+}
+.progress-bar2 li:first-child,
+.progress-bar2 li:last-child {
+  flex: 1;
+}
+.progress-bar2 li:last-child {
+  text-align: right;
+}
+.progress-bar2 li:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-gray-disabled);
+  border-radius: 50%;
+  border: 2px solid var(--color-white);
+  position: absolute;
+  left: calc(50% - 6px);
+  bottom: -5px;
+  z-index: 3;
+  transition: all .2s ease-in-out;
+}
+.progress-bar2 li:first-child:before {
+  left: 0;
+}
+.progress-bar2 li:last-child:before {
+  right: 0;
+  left: auto;
+}
+.progress-bar2 span {
+  transition: opacity .3s ease-in-out;
+}
+.progress-bar2 li:not(.is-active) span {
+  opacity: 0;
+}
+.progress-bar2 .is-complete:not(:first-child):after,
+.progress-bar2 .is-active:not(:first-child):after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: -2px;
+  left: -50%;
+  z-index: 2;
+  border-bottom: 2px solid var(--color-green);
+}
+.progress-bar2 li:last-child span {
+  width: 200%;
+  display: inline-block;
+  position: absolute;
+  left: -100%;
+}
+
+.progress-bar2 .is-complete:last-child:after,
+.progress-bar2 .is-active:last-child:after {
+  width: 200%;
+  left: -100%;
+}
+
+.progress-bar2 .is-complete:before {
+  background-color: var(--color-green);
+}
+
+.progress-bar2 li.is-active span {
+  color: var(--color-green);
+}
+
+.progress-bar2 li.is-complete span {
+  color: var(--color-green);
+}
+
+
+.progress-bar2 .is-active:before,
+
+.progress-bar2 .is-hovered:before {
+  background-color: var(--color-white);
+  border-color: var(--color-green);
+}
+.progress-bar2 li:hover:before,
+.progress-bar2 .is-hovered:before {
+  transform: scale(1.33);
+}
+
+.progress-bar2 li:hover span,
+.progress-bar2 li.is-hovered span {
+  opacity: 1;
+}
+
+.progress-bar2:hover li:not(:hover) span {
+  opacity: 0;
+}
+
+.x-ray .progress-bar2,
+.x-ray .progress-bar2 li {
+  border: 1px dashed red;
+}
+
+.progress-bar2 .has-changes {
+  opacity: 1 !important;
+}
+.progress-bar2 .has-changes:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  left: calc(50% - 4px);
+  bottom: -20px;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20fill%3D%22%23ed1c24%22%20d%3D%22M4%200l4%208H0z%22%2F%3E%3C%2Fsvg%3E');
+}
